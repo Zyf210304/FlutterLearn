@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'stateFull_Group_page.dart';
 import 'fultter_layout_page.dart';
 import 'stateLessLearn.dart';
+import 'gesture_page.dart';
+import 'resourse_page.dart';
 
 void main() => runApp(MyApp());
 
@@ -27,6 +29,8 @@ class MyApp extends StatelessWidget {
         'layout': (BuildContext context) => FullterLayout(),
         'stateFlull': (BuildContext context) => StateFullGroup(),
         'stateLess': (BuildContext context) => GroupLesson(),
+        'gesture':(BuildContext context) => GesturePage(),
+        'resourse':(BuildContext context) => ResoursePage(),
       },
     );
   }
@@ -52,6 +56,8 @@ class _RootNavigationState extends State<RootNavigation> {
           _item('GroupLesson', GroupLesson(), 'stateLess'),
           _item('layout', FullterLayout(), 'layout'),
           _item('stateFlull', StateFullGroup(), 'stateFlull'),
+          _item('gesture', GesturePage(), 'gesture'),
+          _item('resourse', ResoursePage(), 'resourse')
         ],
       ),
     );
