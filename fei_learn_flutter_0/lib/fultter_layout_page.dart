@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_color_plugin/flutter_color_plugin.dart';
 
 ///
 /// 如何进行flutter布局开发
@@ -12,7 +11,6 @@ class _FullterLayoutState extends State<FullterLayout> {
   int _currentIndex = 0;
   @override
   Widget build(BuildContext context) {
-    TextStyle textStyle = TextStyle(fontSize: 20);
     return MaterialApp(
         title: '如何进行flutter布局开发',
         theme: ThemeData(

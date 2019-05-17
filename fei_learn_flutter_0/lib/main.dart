@@ -5,12 +5,20 @@ import 'fultter_layout_page.dart';
 import 'stateLessLearn.dart';
 import 'gesture_page.dart';
 import 'resourse_page.dart';
+import 'launch_page.dart';
+import 'camera_page.dart';
 
 void main() => runApp(MyApp());
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   // This widget is the root of your application.
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   int currentIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -31,6 +39,8 @@ class MyApp extends StatelessWidget {
         'stateLess': (BuildContext context) => GroupLesson(),
         'gesture':(BuildContext context) => GesturePage(),
         'resourse':(BuildContext context) => ResoursePage(),
+        'launch':(BuildContext context) => LauchPage(),
+        'camera':(BuildContext context) => CameraPage(),
       },
     );
   }
@@ -57,7 +67,9 @@ class _RootNavigationState extends State<RootNavigation> {
           _item('layout', FullterLayout(), 'layout'),
           _item('stateFlull', StateFullGroup(), 'stateFlull'),
           _item('gesture', GesturePage(), 'gesture'),
-          _item('resourse', ResoursePage(), 'resourse')
+          _item('resourse', ResoursePage(), 'resourse'),
+          _item('launch', LauchPage(), 'launch'),
+          _item('camera', CameraPage(), 'camera'),
         ],
       ),
     );

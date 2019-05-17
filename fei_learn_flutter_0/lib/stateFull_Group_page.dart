@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_color_plugin/flutter_color_plugin.dart';
 
 /// 
 /// stateFullWidget与基础组件
@@ -12,7 +11,6 @@ class _State extends State<StateFullGroup> {
   int  _currentIndex = 0;
   @override
   Widget build(BuildContext context) {
-    TextStyle textStyle = TextStyle(fontSize: 20);
     return MaterialApp(
       title: 'stateFullWidget与基础组件',
       theme: ThemeData(

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_color_plugin/flutter_color_plugin.dart';
 
 class GesturePage extends StatefulWidget {
   GesturePage({Key key, this.title}) : super(key: key);
