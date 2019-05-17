@@ -22,6 +22,12 @@ class _FullterLayoutState extends State<FullterLayout> {
         home: Scaffold(
           appBar: AppBar(
             title: Text('stateFullWidget与基础组件'),
+            leading: GestureDetector(
+              onTap: (){
+                Navigator.pop(context);
+              },
+              child: Icon(Icons.arrow_back_ios, color: Colors.white),
+            ),
           ),
           bottomNavigationBar: BottomNavigationBar(
             currentIndex: _currentIndex,
@@ -97,9 +103,9 @@ class _FullterLayoutState extends State<FullterLayout> {
                                 ),
                                 Padding(
                                   padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-                                  child: ClipRect(
+                                  child: ClipRRect(
                                     //圆角
-                                    // borderRadius :  BorderRadius.all(Radius.circular(20)),
+                                    borderRadius :  BorderRadius.all(Radius.circular(40)),
                                     child: Opacity(
                                         opacity: 0.6,
                                         child: Image.network(

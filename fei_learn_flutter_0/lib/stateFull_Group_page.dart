@@ -21,8 +21,14 @@ class _State extends State<StateFullGroup> {
       ),
       // home: MyHomePage(title: 'StatelessWidget与基础组件'),
       home :Scaffold(
-        appBar: AppBar(title: Text('stateFullWidget与基础组件'), ),
-
+        appBar: AppBar(title: Text('stateFullWidget与基础组件'), 
+            leading: GestureDetector(
+              onTap: (){
+                Navigator.pop(context);
+              },
+              child: Icon(Icons.arrow_back_ios, color: Colors.white),
+            ),),
+        
         bottomNavigationBar: BottomNavigationBar(
           currentIndex: _currentIndex,
           onTap: (index) {

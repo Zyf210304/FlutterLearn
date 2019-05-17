@@ -1,7 +1,5 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_color_plugin/flutter_color_plugin.dart';
-
 
 class GroupLesson extends StatelessWidget {
   // This widget is the root of your application.
@@ -9,57 +7,66 @@ class GroupLesson extends StatelessWidget {
   Widget build(BuildContext context) {
     TextStyle textStyle = TextStyle(fontSize: 20);
     return MaterialApp(
-      title: 'StatelessWidget与基础组件',
-      theme: ThemeData(
-
-        primarySwatch: Colors.blue,
-      ),
-      // home: MyHomePage(title: 'StatelessWidget与基础组件'),
-      home :Scaffold(
-        appBar: AppBar(title: Text('StatelessWidget与基础组件'), ),
-        body: Container(
-          decoration: BoxDecoration(color: Colors.white),
-          alignment: Alignment.center,
-          child: Column(
-            children: <Widget>[
-              Text(
-                'I am Text',
-                style:  textStyle,),
-                Icon(Icons.phone_iphone, size: 20, color: ColorUtil.color('ff0000'),
+        title: 'StatelessWidget与基础组件',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        // home: MyHomePage(title: 'StatelessWidget与基础组件'),
+        home: Scaffold(
+          appBar: AppBar(
+            title: Text('StatelessWidget与基础组件'),
+            leading: GestureDetector(
+              onTap: () {
+                Navigator.pop(context);
+              },
+              child: Icon(Icons.arrow_back_ios, color: Colors.white),
+            ),
+          ),
+          body: Container(
+            decoration: BoxDecoration(color: Colors.white),
+            alignment: Alignment.center,
+            child: Column(
+              children: <Widget>[
+                Text(
+                  'I am Text',
+                  style: textStyle,
+                ),
+                Icon(
+                  Icons.phone_iphone,
+                  size: 20,
+                  color: ColorUtil.color('ff0000'),
                 ),
                 CloseButton(),
                 BackButton(),
                 Chip(
                   avatar: Icon(Icons.people),
                   label: Text('那个谁'),
-                  ),
+                ),
                 Divider(
                   height: 20,
                   indent: 20,
                   color: Colors.purple,
                 ),
                 Card(
-                    color: Colors.red,
-                    elevation:5 ,
-                    margin: EdgeInsets.all(5),
-                    child: Container(
-                      padding: EdgeInsets.all(10),
-                      child: Text('I am Card', style: textStyle,),
+                  color: Colors.red,
+                  elevation: 5,
+                  margin: EdgeInsets.all(5),
+                  child: Container(
+                    padding: EdgeInsets.all(10),
+                    child: Text(
+                      'I am Card',
+                      style: textStyle,
                     ),
+                  ),
                 ),
                 AlertDialog(
                   title: Text('is alert'),
                   content: Text('learn'),
-
                 )
-            ],
-            
-
+              ],
+            ),
           ),
-        ),
-      )
-
-    );
+        ));
   }
 }
 
