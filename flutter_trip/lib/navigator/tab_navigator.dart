@@ -10,6 +10,7 @@ class TabNavgitor extends StatefulWidget {
 }
 
 class _TabNavgitorState extends State<TabNavgitor> {
+  
   final _defaultColor = Colors.grey;
   final _selectColor = Colors.blue;
   int _currentIndex = 0;
@@ -21,6 +22,11 @@ class _TabNavgitorState extends State<TabNavgitor> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: PageView(
+        onPageChanged: (index) {
+          setState(() {
+            _currentIndex = index;
+          });
+        },
         controller: _controller,
         children: <Widget>[
           HomePage(),
