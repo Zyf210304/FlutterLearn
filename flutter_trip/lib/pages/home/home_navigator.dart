@@ -1,7 +1,14 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:flutter_trip/base/dao/home_dao.dart';
 
-import 'package:http/http.dart' as http;
+import 'package:flutter_trip/model/home_model.dart';
+import 'package:flutter_trip/widget/home/gird_nav.dart';
+import 'package:flutter_trip/widget/home/localNav.dart';
+import 'package:flutter_trip/widget/home/sub_nav.dart';
+import 'package:flutter_trip/widget/home/sales_box.dart';
 
 const APPBAR_SCROLL_OFFSET = 100;
 
@@ -17,9 +24,59 @@ class _HomePageState extends State<HomePage> {
     'https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=221333234,4234408460&fm=27&gp=0.jpg',
   ];
   double _AppBarAlfa = 0;
+  List<LocalNavListModel> localNavList = [];
+  String resultString = '';
+  GridNavModel gridNav;
+  List<SubNavListModel> subNavList = [];
+  SalesBoxModel salesBoxModel;
+  HomeModel homeModel;
+
+  @override
+  void initState() {
+    super.initState();
+    loadData();
+  }
+
+loadData() async{
+  // HomeDao.fetch().then((result){
+    // setState(() {
+    //   resultString = json.encode(result);
+    // });
+  // }).catchError((error){
+    // setState(() {
+    //   resultString = error.toString();
+    // });
+  // });
+  try {
+    homeModel = await HomeDao.homeFetch();
+    setState(() {
+      resultString = json.encode(homeModel);
+      localNavList = homeModel.localNavList;
+      gridNav = homeModel.gridNav;
+      subNavList = homeModel.subNavList;
+      salesBoxModel = homeModel.salesBox;
+    });
+  } catch(error) {
+    setState(() {
+      resultString = error.toString();
+    });
+  }
+  
+
+
+}
+
+
+
+
+
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xfff2f2f2),
       body: Stack(
       children: <Widget>[
         MediaQuery.removePadding(
@@ -51,11 +108,30 @@ class _HomePageState extends State<HomePage> {
                       pagination: SwiperPagination(),
                     ),
                   ),
+                  Padding(
+                    child:LocalNav(gridNavList:localNavList),
+                    padding: EdgeInsets.fromLTRB(7, 4, 7, 4),
+                  ),
+                  Padding(
+                    child:GirdNav(gridNavModel:gridNav),
+                    padding: EdgeInsets.fromLTRB(7, 0, 7, 4),
+                  ),
+                  
+                  Padding(
+                    child:SubNav(subNavList:subNavList),
+                    padding: EdgeInsets.fromLTRB(7, 0, 7, 4),
+                  ),
+                  
+                  Padding(
+                     padding: EdgeInsets.fromLTRB(7, 0, 7, 4),
+                      child: SalesBox(salesBox: salesBoxModel)
+                  ),
+
                   Container(
                     height: 800,
                     child: ListTile(
                       title: Text(
-                        '哈哈',
+                        resultString,
                       ),
                     ),
                   )
@@ -94,4 +170,7 @@ class _HomePageState extends State<HomePage> {
     });
     
   }
+
+
+
 }
