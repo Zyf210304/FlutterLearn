@@ -1,16 +1,24 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:flutter_trip/base/dao/home_dao.dart';
 
 import 'package:flutter_trip/model/home_model.dart';
+import 'package:flutter_trip/widget/base/search_bar.dart';
 import 'package:flutter_trip/widget/home/gird_nav.dart';
 import 'package:flutter_trip/widget/home/localNav.dart';
 import 'package:flutter_trip/widget/home/sub_nav.dart';
 import 'package:flutter_trip/widget/home/sales_box.dart';
 
+import 'package:flutter_trip/base/util/navigator_util.dart';
+import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
+
 const APPBAR_SCROLL_OFFSET = 100;
+const SEARCH_BAR_DEFAULT_TEXT = '网红打卡地 景点 酒店 美食';
+
+
 
 class HomePage extends StatefulWidget {
   @override
@@ -75,7 +83,13 @@ loadData() async{
 
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
+      // appBar: AppBar(
+      //   elevation: 0.5,
+      //   brightness: Brightness.light,
+      //   backgroundColor: Colors.white,
+      // ),
       backgroundColor: Color(0xfff2f2f2),
       body: Stack(
       children: <Widget>[
@@ -89,7 +103,17 @@ loadData() async{
                   _onScroll(scrollNotification.metrics.pixels);
                 }
               },
-              child: ListView(
+              child:_list
+          )
+        ),
+        _appBar,
+      ],
+    ));
+  }
+
+
+  Widget get _list {
+     return ListView(
                 children: <Widget>[
                   Container(
                     height: 160,
@@ -136,34 +160,61 @@ loadData() async{
                     ),
                   )
               ],
-            ),
-          )
-        ),
-        Opacity(
-          child:Container(
-            height: 80,
-            decoration: BoxDecoration(color: Colors.white),
-            child: Center(
-              child: Padding(
-                padding: EdgeInsets.only(top:20),
-                child: Text('首页'),
-              )
-            ,),
-          ), 
-          opacity: _AppBarAlfa,
-        ),
-      ],
-    ));
+            );
   }
 
+
+  Widget get _appBar {
+    
+    return Column(
+      
+      children: <Widget>[
+        Container(
+          
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              //AppBar渐变遮罩背景
+              colors: [Color(0x66000000), Colors.transparent],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+            ),
+          ),
+          child: Container(
+            padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
+            height: 80.0,
+            decoration: BoxDecoration(
+              color: Color.fromARGB((_AppBarAlfa * 255).toInt(), 255, 255, 255),
+            ),
+            child: SearchBar(
+              searchBarType: _AppBarAlfa > 0.2
+                  ? SearchBarType.homeLight
+                  : SearchBarType.home,
+              inputBoxClick: _jumpToSearch,
+              speakClick: _jumpToSpeak,
+              defaultText: SEARCH_BAR_DEFAULT_TEXT,
+              leftButtonClick: () {},
+            ),
+          ),
+        ),
+        Container(
+            height: _AppBarAlfa > 0.2 ? 0.5 : 0,
+            decoration: BoxDecoration(
+                boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 0.5)]))
+      ],
+    );
+  }
+
+  
   void _onScroll(double offset) {
     print(offset);
     setState(() {
       double alpha = offset/ APPBAR_SCROLL_OFFSET;
       if (alpha < 0) {
         _AppBarAlfa = 0;
+        SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light);
       } else if(alpha > 1) {
         _AppBarAlfa = 1;
+        SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
       } else {
         _AppBarAlfa = alpha;
       }
@@ -171,6 +222,18 @@ loadData() async{
     
   }
 
+  _jumpToSearch() {
+    // NavigatorUtil.push(
+    //     context,
+    //     SearchPage(
+    //       hint: SEARCH_BAR_DEFAULT_TEXT,
+    //     ));
+  }
 
+  _jumpToSpeak() {
+    // NavigatorUtil.push(context, SpeakPage());
+  }
+
+  
 
 }
