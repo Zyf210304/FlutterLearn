@@ -1,0 +1,4 @@
+#Tue May 28 16:19:45 CST 2019
+base.0=E\:\\code\\android\\hu_bei_e_car\\build\\app\\intermediates\\transforms\\dexMerger\\debug\\0
+path.0=classes.dex
+renamed.0=classes.dex
