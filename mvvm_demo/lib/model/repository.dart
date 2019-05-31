@@ -17,6 +17,10 @@ class GithubService{
 class GithubRepo {
 
   final GithubService _remote;
+
+  /// sharedPreference
+  ///
+  /// 也应该算在Model层，在这里面处理数据的读取
   final SpUtil _sp;
 
   GithubRepo(this._remote, this._sp);
@@ -30,6 +34,8 @@ class GithubRepo {
     _sp.putString(KEY_TOKEN, "basic " + base64Encode(utf8.encode('$username:$password')));
     return _remote.login();
   }
+
+  
 
 
 }

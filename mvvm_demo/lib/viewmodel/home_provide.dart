@@ -3,9 +3,12 @@ import 'package:mvvm_demo/model/repository.dart';
 import 'package:mvvm_demo/view/base.dart';
 import 'package:rxdart/rxdart.dart';
 
+/// ViewModel 层
+///
+/// 将 Model层 [GithubRepo] 返回的数据转换成 View 层 [HomePage] 需要展示的数据
+/// 通过 [notifyListeners] 通知UI层更新
 class HomeProvide extends BaseProvide {
-
-  final GithubRepo  _repo;
+  final GithubRepo _repo;
   String username = "";
   String password = "";
   bool _loading = false;
@@ -15,10 +18,7 @@ class HomeProvide extends BaseProvide {
 
   final String title;
 
-  HomeProvide(this._repo, this.title);
-
   String get response => _response;
-
 
   set response(String response) {
     _response = response;
@@ -35,14 +35,15 @@ class HomeProvide extends BaseProvide {
     _btnWidth = btnWidth;
     notifyListeners();
   }
-
+  
 
   set loading(bool loading) {
     _loading = loading;
     notifyListeners();
   }
 
-  
+  HomeProvide(this.title, this._repo);
+
   /// 登录
   ///
   /// 调用 model层[GithubRepo] 的 login 方法进行登录
@@ -62,5 +63,4 @@ class HomeProvide extends BaseProvide {
       })
       .doOnListen(() => loading = true)
       .doOnDone(() => loading = false);
-      
 }
