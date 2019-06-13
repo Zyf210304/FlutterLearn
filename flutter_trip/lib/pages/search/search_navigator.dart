@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_trip/base/dao/search_dao.dart';
 import 'package:flutter_trip/model/search_model.dart';
 import 'package:flutter_trip/widget/base/search_bar.dart';
@@ -26,6 +27,12 @@ class _SearchPageState extends State<SearchPage> {
   String keywrod;
   SearchModel searchModel;
 
+  @override
+  void initState(){
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
+    super.initState();
+  }
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(

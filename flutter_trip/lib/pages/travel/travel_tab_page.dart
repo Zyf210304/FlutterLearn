@@ -1,6 +1,7 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_trip/base/dao/travel_tab_dao.dart';
 import 'package:flutter_trip/base/util/navigator_util.dart';
@@ -35,6 +36,7 @@ class _TravelTabPageState extends State<TravelTabPage>
 
   @override
   void initState() {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
     _loadData();
     _scrollController.addListener(() {
       if (_scrollController.position.pixels ==

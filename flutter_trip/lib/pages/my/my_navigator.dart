@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
 
 class MYPage extends StatefulWidget {
   @override
@@ -7,6 +9,12 @@ class MYPage extends StatefulWidget {
 
 class _MYPageState extends State<MYPage> {
 
+  @override
+  void initState(){
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
+    super.initState();
+  }
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
