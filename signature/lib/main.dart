@@ -126,6 +126,8 @@ class _MyAppState extends State<MyApp> {
   }
 }
 
+
+
 class Signature extends CustomPainter {
   List<Offset> points;
   Signature(this.points);
@@ -143,6 +145,7 @@ class Signature extends CustomPainter {
       }
     }
   }
+
 
   @override
   bool shouldRepaint(Signature oldDelegate) => oldDelegate.points != points;
